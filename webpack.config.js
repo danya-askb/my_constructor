@@ -11,6 +11,8 @@ console.log('IS DEV ', isDev)
 
 const filename = ext => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`
 
+const target = isDev ? 'web' : 'browserslist'
+
 const jsLoaders = () => {
   const loaders = [
     {
@@ -47,9 +49,11 @@ module.exports = {
     hot: isDev
   },
   devtool: isDev ? 'source-map' : false,
+  target: target,
   plugins: [
     new HtmlWebpackPlugin(
       {
+        template: 'index.html',
         minify: {
           removeComments: isProd,
           collapseWhitespace: isProd
